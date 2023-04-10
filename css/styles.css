@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  line-height: 1;
+  color: white;
+  background: black;
+  height: 100vh;
+}
+.container {
+  background-color: black;
+  align-items: center;
+}
+.h1{
+    font-size: 100 px;
+}
+
+.shop {
+  background-color: blue
+  max-width: 500px;
+  padding: 15px;
+}
+
+.card {
+  background-color:#0d6efd;
+  padding: 10px;
+  margin-bottom: 10px;
+  height: auto;
+  overflow: hidden;
+}
+
+.card img {
+  float: center;
+  margin-right: 5px;
+}
+.card h1 {
+    float: right;
+    font-size: 25px;
+  }
+
+.card h3 {
+  float: right;
+  font-size: 20px;
+}

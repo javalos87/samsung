@@ -22,20 +22,23 @@ const celulares = [
   { imagen: "./images/A72.webp", id: 10, nombre: "SAMSUNG A72", precio: 98852 },
 ];
 var stocks = [
-  { id: 1, cantidad: 26 },
+  { id: 1, cantidad: 1 },
   { id: 2, cantidad: 20 },
   { id: 3, cantidad: 26 },
   { id: 4, cantidad: 60 },
   { id: 5, cantidad: 12 },
-  { id: 6, cantidad: 0 },
+  { id: 6, cantidad: 1 },
   { id: 7, cantidad: 6 },
   { id: 8, cantidad: 10 },
   { id: 9, cantidad: 26 },
   { id: 10, cantidad: 40 },
 ];
+let id;
 
-for (var i = 0; i < celulares.length; i++) {
-  document.querySelector(".shop").innerHTML += `
+function cargar() {
+  for (var i = 0; i < celulares.length; i++) {
+    if (stocks[i].cantidad != 0) {
+      document.querySelector(".shop").innerHTML += `
   <div class="col-3 text-center">
     <div class="card">  
         <img src="${celulares[i].imagen}" alt="${celulares[i].nombre}">
@@ -47,10 +50,16 @@ for (var i = 0; i < celulares.length; i++) {
     </div> 
   </div>   
   `;
+    }
+  }
 }
 const error = "⛔️ Error en el código ingresado.";
 const opcion = "Por favor ingrese el codigo del celular a comprar";
-
+function modStock(id) {
+  let foundindex = stocks.findIndex((x) => x.id == id);
+  let numero = stocks[foundindex].cantidad;
+  stocks[foundindex].cantidad = numero - 1;
+}
 function buscar(id, tabla) {
   let busqueda = tabla.find((datos) => datos.id === parseInt(id));
   return busqueda;
@@ -70,7 +79,10 @@ function terminarCompra() {
         buy.subtotal() +
         "\n Muchas gracias por la compra"
     );
+    modStock(id);
     carrito.length = 0;
+    document.querySelector(".shop").innerHTML = "";
+    cargar();
   }
 }
 
@@ -79,7 +91,7 @@ function verCarrito() {
 }
 
 function comprar() {
-  let id = prompt(opcion);
+  id = prompt(opcion);
   if (isNaN(id)) {
     alert(error);
     let respuesta = confirm("¿Deseas intentar de nuevo?");
@@ -108,3 +120,4 @@ function comprar() {
 
 const element = document.getElementById("myBtn");
 element.addEventListener("click", comprar);
+window.addEventListener("load", cargar);
